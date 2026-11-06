@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Armando | Pagina personale</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+    header {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, #1e3a8a, #7c3aed);
+    }
+    h1 { font-size: 3rem; margin-bottom: 0.5rem; }
+    header p { font-size: 1.25rem; opacity: 0.9; max-width: 600px; }
+    .bottone {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 2rem;
+      background: #ffffff;
+      color: #1e3a8a;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 999px;
+    }
+    .bottone:hover { background: #e0e7ff; }
+    section { max-width: 900px; margin: 0 auto; padding: 4rem 1.5rem; }
+    h2 { font-size: 2rem; margin-bottom: 1.5rem; text-align: center; }
+    .schede {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .scheda {
+      background: #1e293b;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid #334155;
+    }
+    .scheda h3 { margin-bottom: 0.5rem; color: #a5b4fc; }
+    footer { text-align: center; padding: 2rem; color: #94a3b8; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Ciao, sono Armando 👋</h1>
+    <p>Sto imparando a creare progetti con GitHub e Claude. Questa è la mia prima pagina web.</p>
+    <a class="bottone" href="https://github.com/armandoleone3011">Il mio GitHub</a>
+  </header>
+
+  <section>
+    <h2>Cosa faccio</h2>
+    <div class="schede">
+      <div class="scheda">
+        <h3>Imparo</h3>
+        <p>Sto scoprendo Git, GitHub e lo sviluppo web passo dopo passo.</p>
+      </div>
+      <div class="scheda">
+        <h3>Creo</h3>
+        <p>Realizzo piccoli progetti per mettere in pratica quello che imparo.</p>
+      </div>
+      <div class="scheda">
+        <h3>Condivido</h3>
+        <p>Pubblico i miei lavori online, come questa pagina.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Armando · Pubblicato con GitHub Pages</p>
+  </footer>
+
+</body>
+</html>
