@@ -3,84 +3,490 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Armando | Pagina personale</title>
+  <title>Armando Leone · Business Analyst che costruisce con l'AI</title>
+  <meta name="description" content="Armando Leone: Business Analyst ed esperto ERP che costruisce strumenti con l'intelligenza artificiale. Progetti, stack e diario di bordo.">
+  <meta name="theme-color" content="#0a0a0b">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #0a0a0b;
+      --pannello: #111214;
+      --pannello-2: #16181b;
+      --bordo: #24272c;
+      --testo: #e6edf3;
+      --tenue: #8b949e;
+      --fioco: #6e7681;
+      --verde: #7ee787;
+      --blu: #79c0ff;
+      --viola: #d2a8ff;
+      --arancio: #ffa657;
+      --rosso: #ff7b72;
+      --mono: "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+      --sans: "Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
+      --max: 1120px;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      background: #0f172a;
-      color: #e2e8f0;
-      line-height: 1.6;
+      font-family: var(--sans); background: var(--bg); color: var(--testo); line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px);
+      background-size: 24px 24px;
     }
-    header {
-      min-height: 70vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
-      background: linear-gradient(135deg, #1e3a8a, #7c3aed);
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; height: auto; }
+    .contenitore { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ---------- Navigazione ---------- */
+    nav { position: sticky; top: 0; z-index: 20; background: rgba(10,10,11,0.8); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--bordo); }
+    nav .contenitore { height: 56px; display: flex; align-items: center; gap: 1.5rem; font-family: var(--mono); font-size: 0.85rem; }
+    .logo { color: var(--testo); white-space: nowrap; }
+    .logo span { color: var(--verde); }
+    nav ul { display: flex; gap: 1.5rem; list-style: none; margin-left: auto; }
+    nav ul a { color: var(--tenue); transition: color .2s; }
+    nav ul a:hover { color: var(--testo); }
+    .lingua { display: flex; border: 1px solid var(--bordo); border-radius: 6px; overflow: hidden; }
+    .lingua button { background: none; border: 0; color: var(--tenue); font: inherit; font-size: 0.75rem; padding: 0.25rem 0.6rem; cursor: pointer; }
+    .lingua button[aria-pressed="true"] { background: var(--pannello-2); color: var(--verde); }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 5.5rem 0 4rem; }
+    .hero .contenitore { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 3rem; align-items: center; }
+    .finestra { background: var(--pannello); border: 1px solid var(--bordo); border-radius: 12px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.5); }
+    .barra { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; border-bottom: 1px solid var(--bordo); background: var(--pannello-2); }
+    .barra i { width: 11px; height: 11px; border-radius: 50%; background: #3a3d42; }
+    .barra i:nth-child(1) { background: #ff5f57; } .barra i:nth-child(2) { background: #febc2e; } .barra i:nth-child(3) { background: #28c840; }
+    .barra span { margin-left: 0.75rem; font-family: var(--mono); font-size: 0.78rem; color: var(--fioco); }
+    .terminale { font-family: var(--mono); font-size: 0.95rem; padding: 1.5rem 1.5rem 1.75rem; min-height: 340px; }
+    .terminale .riga { white-space: pre-wrap; }
+    .prompt { color: var(--verde); }
+    .cmd { color: var(--testo); }
+    .out { color: var(--tenue); margin-bottom: 0.9rem; }
+    .out b { color: var(--testo); font-weight: 700; }
+    .out .acc { color: var(--viola); }
+    .cursore { display: inline-block; width: 0.6em; height: 1.1em; background: var(--verde); vertical-align: -0.2em; animation: lampeggia 1s steps(1) infinite; }
+    @keyframes lampeggia { 50% { opacity: 0; } }
+
+    .hero h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1.05; letter-spacing: -0.035em; font-weight: 700; margin-top: 2rem; }
+    .hero h1 .grad { background: linear-gradient(90deg, var(--verde), var(--blu) 55%, var(--viola)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p.sotto { color: var(--tenue); font-size: 1.1rem; margin-top: 1rem; max-width: 560px; }
+    .azioni { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.75rem; }
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.88rem; padding: 0.7rem 1.1rem; border-radius: 8px; border: 1px solid var(--bordo); transition: border-color .2s, background .2s, transform .2s; }
+    .btn:hover { transform: translateY(-1px); border-color: var(--tenue); }
+    .btn-verde { background: var(--verde); color: #0a0a0b; border-color: var(--verde); font-weight: 700; }
+    .btn-verde:hover { background: #9af0a1; border-color: #9af0a1; }
+    .btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .ritratto { position: relative; max-width: 380px; margin: 0 auto; }
+    .ritratto::before { content: ""; position: absolute; inset: -12% -18% 5%; background: radial-gradient(closest-side, rgba(126,231,135,0.18), rgba(121,192,255,0.10) 55%, transparent); }
+    .ritratto img { position: relative; -webkit-mask-image: linear-gradient(to bottom, #000 65%, transparent 100%); mask-image: linear-gradient(to bottom, #000 65%, transparent 100%); }
+    .badge { position: absolute; z-index: 1; font-family: var(--mono); font-size: 0.75rem; background: var(--pannello); border: 1px solid var(--bordo); border-radius: 999px; padding: 0.3rem 0.75rem; white-space: nowrap; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+    .badge.b1 { top: 14%; left: -6%; color: var(--blu); }
+    .badge.b2 { top: 46%; right: -8%; color: var(--viola); }
+    .badge.b3 { bottom: 18%; left: -2%; color: var(--arancio); }
+    .badge::before { content: "● "; }
+
+    /* ---------- Sezioni ---------- */
+    section { padding: 5.5rem 0; }
+    .titolo-sez { font-family: var(--mono); font-size: 0.85rem; color: var(--verde); margin-bottom: 0.6rem; }
+    h2 { font-size: clamp(1.9rem, 3.6vw, 2.6rem); letter-spacing: -0.03em; line-height: 1.12; font-weight: 700; }
+    .intro { color: var(--tenue); max-width: 640px; margin-top: 0.75rem; font-size: 1.05rem; }
+
+    /* Codice "chi sono" */
+    .chi { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 3rem; align-items: start; }
+    .codice { font-family: var(--mono); font-size: 0.88rem; line-height: 1.75; padding: 1.25rem 0; overflow-x: auto; }
+    .codice ol { list-style: none; counter-reset: riga; }
+    .codice li { counter-increment: riga; padding-right: 1.25rem; white-space: pre; }
+    .codice li::before { content: counter(riga); display: inline-block; width: 2.5rem; padding-right: 1rem; text-align: right; color: #3d434b; }
+    .k { color: var(--rosso); } .p { color: var(--blu); } .s { color: #a5d6ff; } .c { color: var(--fioco); font-style: italic; } .f { color: var(--viola); } .n { color: var(--arancio); }
+
+    /* Progetti */
+    .progetti { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+    .progetto { background: var(--pannello); border: 1px solid var(--bordo); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; transition: border-color .25s, transform .25s; }
+    .progetto:hover { border-color: #3a3f46; transform: translateY(-3px); }
+    .progetto .testa { display: flex; align-items: center; gap: 0.6rem; font-family: var(--mono); font-size: 0.95rem; color: var(--blu); }
+    .progetto .testa svg { width: 16px; height: 16px; fill: var(--fioco); flex: none; }
+    .progetto .stato { margin-left: auto; font-size: 0.7rem; border: 1px solid var(--bordo); border-radius: 999px; padding: 0.1rem 0.55rem; color: var(--tenue); }
+    .progetto .stato.pubblico { color: var(--verde); border-color: rgba(126,231,135,0.35); }
+    .progetto h3 { font-size: 1.15rem; margin: 0.9rem 0 0.4rem; letter-spacing: -0.01em; }
+    .progetto p { color: var(--tenue); font-size: 0.95rem; flex: 1; }
+    .tag { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.1rem; }
+    .tag span { font-family: var(--mono); font-size: 0.72rem; color: var(--tenue); background: var(--pannello-2); border: 1px solid var(--bordo); border-radius: 6px; padding: 0.15rem 0.5rem; }
+    .tag span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.35rem; background: var(--fioco); vertical-align: 0; }
+    .tag .t-html::before { background: #e34c26; } .tag .t-css::before { background: #663399; } .tag .t-js::before { background: #f1e05a; }
+    .tag .t-py::before { background: #3572a5; } .tag .t-ai::before { background: var(--viola); } .tag .t-xl::before { background: #217346; } .tag .t-git::before { background: #f05032; }
+    .progetto .link { font-family: var(--mono); font-size: 0.8rem; color: var(--verde); margin-top: 1rem; overflow-wrap: anywhere; }
+
+    /* Stack */
+    .stack { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+    .gruppo { background: var(--pannello); border: 1px solid var(--bordo); border-radius: 12px; padding: 1.5rem; }
+    .gruppo h3 { font-family: var(--mono); font-size: 0.85rem; color: var(--tenue); font-weight: 400; margin-bottom: 1rem; }
+    .gruppo h3 b { color: var(--rosso); font-weight: 400; }
+    .voce { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; align-items: center; font-size: 0.92rem; padding: 0.4rem 0; }
+    .barra-liv { display: flex; gap: 3px; }
+    .barra-liv b { width: 12px; height: 8px; border-radius: 2px; background: #262a30; }
+    .barra-liv b.on { background: var(--verde); }
+    .legenda-liv { font-family: var(--mono); font-size: 0.75rem; color: var(--fioco); margin-top: 1rem; }
+
+    /* Diario di bordo */
+    .log { margin-top: 2.5rem; border-left: 1px solid var(--bordo); margin-left: 0.4rem; }
+    .voce-log { position: relative; padding: 0 0 2.25rem 2rem; }
+    .voce-log::before { content: ""; position: absolute; left: -6px; top: 0.4rem; width: 11px; height: 11px; border-radius: 50%; background: var(--bg); border: 2px solid var(--verde); }
+    .voce-log.passato::before { border-color: var(--fioco); }
+    .voce-log time { font-family: var(--mono); font-size: 0.8rem; color: var(--verde); }
+    .voce-log.passato time { color: var(--fioco); }
+    .voce-log h3 { font-size: 1.1rem; margin: 0.2rem 0 0.3rem; }
+    .voce-log p { color: var(--tenue); font-size: 0.95rem; max-width: 680px; }
+    .voce-log code { font-family: var(--mono); font-size: 0.85em; color: var(--arancio); background: var(--pannello-2); padding: 0.05rem 0.35rem; border-radius: 4px; }
+
+    /* Contatti */
+    .contatti { text-align: center; }
+    .contatti .finestra { max-width: 760px; margin: 2.5rem auto 0; text-align: left; }
+    .contatti .terminale { min-height: 0; }
+    .contatti .azioni { margin-top: 0.5rem; }
+
+    footer { border-top: 1px solid var(--bordo); font-family: var(--mono); font-size: 0.78rem; color: var(--fioco); }
+    footer .contenitore { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-top: 1.75rem; padding-bottom: 2.25rem; }
+    footer a { color: var(--tenue); text-decoration: underline; text-underline-offset: 3px; }
+    footer a:hover { color: var(--verde); }
+
+    .appare { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+    .appare.visibile { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .appare { opacity: 1; transform: none; transition: none; } .cursore { animation: none; } html { scroll-behavior: auto; } }
+
+    @media (max-width: 900px) {
+      nav ul { display: none; }
+      .lingua { margin-left: auto; }
+      .hero .contenitore, .chi { grid-template-columns: 1fr; }
+      .hero { padding-top: 3rem; }
+      .ritratto { max-width: 300px; }
+      .stack { grid-template-columns: 1fr; }
     }
-    h1 { font-size: 3rem; margin-bottom: 0.5rem; }
-    header p { font-size: 1.25rem; opacity: 0.9; max-width: 600px; }
-    .bottone {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 0.8rem 2rem;
-      background: #ffffff;
-      color: #1e3a8a;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 999px;
+    @media (max-width: 640px) {
+      .progetti { grid-template-columns: 1fr; }
+      .terminale { font-size: 0.82rem; padding: 1.1rem; min-height: 300px; }
+      section { padding: 4rem 0; }
+      .badge { display: none; }
     }
-    .bottone:hover { background: #e0e7ff; }
-    section { max-width: 900px; margin: 0 auto; padding: 4rem 1.5rem; }
-    h2 { font-size: 2rem; margin-bottom: 1.5rem; text-align: center; }
-    .schede {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-    }
-    .scheda {
-      background: #1e293b;
-      padding: 1.5rem;
-      border-radius: 12px;
-      border: 1px solid #334155;
-    }
-    .scheda h3 { margin-bottom: 0.5rem; color: #a5b4fc; }
-    footer { text-align: center; padding: 2rem; color: #94a3b8; font-size: 0.9rem; }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Ciao, sono Armando 👋</h1>
-    <p>Sto imparando a creare progetti con GitHub e Claude. Questa è la mia prima pagina web.</p>
-    <a class="bottone" href="https://github.com/armandoleone3011">Il mio GitHub</a>
+  <nav>
+    <div class="contenitore">
+      <a href="#" class="logo">~/armando<span>-leone</span></a>
+      <ul>
+        <li><a href="#chi-sono">./chi-sono</a></li>
+        <li><a href="#progetti">./progetti</a></li>
+        <li><a href="#stack">./stack</a></li>
+        <li><a href="#log">./diario</a></li>
+      </ul>
+      <div class="lingua" role="group" aria-label="Lingua / Language">
+        <button type="button" data-lang="it" aria-pressed="true">IT</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="contenitore">
+      <div>
+        <div class="finestra appare" aria-label="Terminale di presentazione">
+          <div class="barra"><i></i><i></i><i></i><span>armando@parma: ~</span></div>
+          <div class="terminale" id="terminale" aria-live="polite"></div>
+        </div>
+        <h1 class="appare" data-i18n="hero.titolo">Business Analyst che <span class="grad">costruisce con l'AI</span>.</h1>
+        <p class="sotto appare" data-i18n="hero.sotto">Conosco i processi delle aziende e i loro gestionali. Ora imparo a trasformarli in strumenti, automazioni e siti, con l'intelligenza artificiale come compagna di lavoro.</p>
+        <div class="azioni appare">
+          <a class="btn btn-verde" href="https://github.com/armandoleone3011" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"/></svg>
+            GitHub
+          </a>
+          <a class="btn" href="https://www.linkedin.com/in/armando-leone-1b5327211/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+            LinkedIn
+          </a>
+          <a class="btn" href="#progetti" data-i18n="hero.progetti">./progetti →</a>
+        </div>
+      </div>
+      <div class="ritratto appare">
+        <span class="badge b1">ERP</span>
+        <span class="badge b2">Claude Code</span>
+        <span class="badge b3">Excel + VBA</span>
+        <img src="assets/armando.webp" alt="Armando Leone" width="897" height="900">
+      </div>
+    </div>
   </header>
 
-  <section>
-    <h2>Cosa faccio</h2>
-    <div class="schede">
-      <div class="scheda">
-        <h3>Imparo</h3>
-        <p>Sto scoprendo Git, GitHub e lo sviluppo web passo dopo passo.</p>
+  <!-- CHI SONO -->
+  <section id="chi-sono">
+    <div class="contenitore chi">
+      <div>
+        <p class="titolo-sez appare">// chi-sono</p>
+        <h2 class="appare" data-i18n="chi.titolo">Dal mondo dei processi a quello del codice.</h2>
+        <p class="intro appare" data-i18n="chi.testo">Ingegnere, due anni nella logistica internazionale tra gestione del traffico e contabilità, oggi consulente ERP. Il codice è il mio nuovo strumento: non per diventare uno sviluppatore puro, ma per costruire da solo le soluzioni che prima potevo solo descrivere.</p>
       </div>
-      <div class="scheda">
-        <h3>Creo</h3>
-        <p>Realizzo piccoli progetti per mettere in pratica quello che imparo.</p>
+      <div class="finestra appare">
+        <div class="barra"><i></i><i></i><i></i><span>armando.js</span></div>
+        <div class="codice" aria-label="Profilo in forma di codice">
+          <ol>
+            <li><span class="k">const</span> <span class="p">armando</span> = {</li>
+            <li>  ruolo: <span class="s">"Business Analyst · ERP"</span>,</li>
+            <li>  base: <span class="s">"Parma, IT"</span>,</li>
+            <li>  laurea: <span class="s">"Ingegneria (magistrale)"</span>,</li>
+            <li>  esperienza: [<span class="s">"ERP"</span>, <span class="s">"logistica"</span>, <span class="s">"contabilità"</span>],</li>
+            <li>  forte_in: [<span class="s">"Excel"</span>, <span class="s">"processi"</span>, <span class="s">"dati"</span>],</li>
+            <li>  sta_imparando: [<span class="s">"AI"</span>, <span class="s">"Git"</span>, <span class="s">"web"</span>],</li>
+            <li>  lingue: [<span class="s">"it"</span>, <span class="s">"en"</span>],</li>
+            <li>  anni_esperienza: <span class="n">2.5</span>,</li>
+            <li>};</li>
+            <li></li>
+            <li><span class="c">// obiettivo: unire ERP e AI</span></li>
+            <li><span class="p">armando</span>.<span class="f">costruisci</span>(<span class="s">"strumenti che fanno risparmiare tempo"</span>);</li>
+          </ol>
+        </div>
       </div>
-      <div class="scheda">
-        <h3>Condivido</h3>
-        <p>Pubblico i miei lavori online, come questa pagina.</p>
+    </div>
+  </section>
+
+  <!-- PROGETTI -->
+  <section id="progetti">
+    <div class="contenitore">
+      <p class="titolo-sez appare">// progetti</p>
+      <h2 class="appare" data-i18n="prog.titolo">Cose che ho costruito.</h2>
+      <p class="intro appare" data-i18n="prog.intro">Pochi progetti, tutti reali. Alcuni sono pubblici su GitHub, altri sono strumenti di lavoro e restano privati.</p>
+      <div class="progetti">
+        <article class="progetto appare">
+          <div class="testa"><svg viewBox="0 0 16 16"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.71 1.71.75.75 0 0 1-1.07 1.05A2.5 2.5 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.71A2.5 2.5 0 0 1 4.5 9h8Z"/></svg>landing-page<span class="stato pubblico" data-i18n="st.pubblico">pubblico</span></div>
+          <h3 data-i18n="p1.t">Il mio sito personale</h3>
+          <p data-i18n="p1.p">Due pagine nello stesso repository: questa, da sviluppatore, e una da consulente, sobria ed editoriale. Bilingue, responsive, foto scontornate con l'AI. Costruito con Claude Code, un branch alla volta.</p>
+          <div class="tag"><span class="t-html">HTML</span><span class="t-css">CSS</span><span class="t-js">JavaScript</span><span class="t-git">Git</span></div>
+          <a class="link" href="https://github.com/armandoleone3011/landing-page" target="_blank" rel="noopener">→ github.com/armandoleone3011/landing-page</a>
+        </article>
+        <article class="progetto appare">
+          <div class="testa"><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm4.9-1.6a.75.75 0 0 1 1.06 0L9 7.94l1.54-1.54a.75.75 0 1 1 1.06 1.06l-2.07 2.07a.75.75 0 0 1-1.06 0L6.4 7.46a.75.75 0 0 1 0-1.06Z"/></svg>english-coach<span class="stato" data-i18n="st.locale">skill locale</span></div>
+          <h3 data-i18n="p2.t">Un coach d'inglese dentro Claude Code</h3>
+          <p data-i18n="p2.p">Una skill che uso ogni giorno: quando scrivo o detto in inglese, corregge gli errori principali, mi mostra come lo direbbe un madrelingua e verifica di aver capito la richiesta prima di eseguirla.</p>
+          <div class="tag"><span class="t-ai">Claude Code</span><span class="t-ai">Prompt design</span><span>Markdown</span></div>
+        </article>
+        <article class="progetto appare">
+          <div class="testa"><svg viewBox="0 0 16 16"><path d="M0 1.75C0 .78.78 0 1.75 0h12.5C15.22 0 16 .78 16 1.75v12.5A1.75 1.75 0 0 1 14.25 16H1.75A1.75 1.75 0 0 1 0 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .14.11.25.25.25h12.5a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25ZM4 11.5l2.5-3 2 2.5 1.5-2 2 2.5Z"/></svg>rimuovi-sfondo<span class="stato" data-i18n="st.script">script</span></div>
+          <h3 data-i18n="p3.t">Scontornare le foto con l'AI</h3>
+          <p data-i18n="p3.p">Uno script Python che usa un modello di segmentazione per togliere lo sfondo ai ritratti, ritagliarli e ottimizzarli per il web. La foto in questa pagina è passata da lì.</p>
+          <div class="tag"><span class="t-py">Python</span><span class="t-ai">rembg</span><span>Pillow</span></div>
+        </article>
+        <article class="progetto appare">
+          <div class="testa"><svg viewBox="0 0 16 16"><path d="M4 1.75C4 .78 4.78 0 5.75 0h8.5C15.22 0 16 .78 16 1.75v8.5A1.75 1.75 0 0 1 14.25 12h-8.5A1.75 1.75 0 0 1 4 10.25Zm1.75-.25a.25.25 0 0 0-.25.25v8.5c0 .14.11.25.25.25h8.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25ZM1.5 5.75a.25.25 0 0 1 .25-.25H3V4H1.75C.78 4 0 4.78 0 5.75v8.5C0 15.22.78 16 1.75 16h8.5A1.75 1.75 0 0 0 12 14.25V13h-1.5v1.25a.25.25 0 0 1-.25.25h-8.5a.25.25 0 0 1-.25-.25Z"/></svg>strumenti-logistica<span class="stato" data-i18n="st.privato">privato</span></div>
+          <h3 data-i18n="p4.t">Strumenti Excel per la logistica</h3>
+          <p data-i18n="p4.p">Prima del codice "vero": un modello Excel e VBA per verificare le tariffe di noleggio dei rimorchi, con previsione mensile e dashboard, e un sistema per tracciare gli asset presso i trasportatori.</p>
+          <div class="tag"><span class="t-xl">Excel</span><span class="t-xl">VBA</span><span>Dashboard</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section id="stack">
+    <div class="contenitore">
+      <p class="titolo-sez appare">// stack</p>
+      <h2 class="appare" data-i18n="stack.titolo">Con cosa lavoro, onestamente.</h2>
+      <p class="intro appare" data-i18n="stack.intro">Il livello è una mia autovalutazione: preferisco dire dove sono davvero.</p>
+      <div class="stack">
+        <div class="gruppo appare">
+          <h3><b>const</b> business = [</h3>
+          <div class="voce"><span>Excel</span><span class="barra-liv" data-n="5" role="img" aria-label="5/6"></span></div>
+          <div class="voce"><span data-i18n="s.processi">Analisi dei processi</span><span class="barra-liv" data-n="4" role="img" aria-label="4/6"></span></div>
+          <div class="voce"><span data-i18n="s.erp">Gestionali ERP</span><span class="barra-liv" data-n="3" role="img" aria-label="3/6"></span></div>
+          <div class="voce"><span data-i18n="s.cont">Contabilità e controllo</span><span class="barra-liv" data-n="3" role="img" aria-label="3/6"></span></div>
+        </div>
+        <div class="gruppo appare">
+          <h3><b>const</b> ai = [</h3>
+          <div class="voce"><span>Claude Code</span><span class="barra-liv" data-n="3" role="img" aria-label="3/6"></span></div>
+          <div class="voce"><span data-i18n="s.prompt">Scrivere prompt e skill</span><span class="barra-liv" data-n="3" role="img" aria-label="3/6"></span></div>
+          <div class="voce"><span data-i18n="s.voce">Dettatura e lavoro vocale</span><span class="barra-liv" data-n="3" role="img" aria-label="3/6"></span></div>
+          <div class="voce"><span data-i18n="s.agenti">Agenti e automazioni</span><span class="barra-liv" data-n="1" role="img" aria-label="1/6"></span></div>
+        </div>
+        <div class="gruppo appare">
+          <h3><b>const</b> codice = [</h3>
+          <div class="voce"><span>HTML · CSS</span><span class="barra-liv" data-n="2" role="img" aria-label="2/6"></span></div>
+          <div class="voce"><span>Git · GitHub</span><span class="barra-liv" data-n="2" role="img" aria-label="2/6"></span></div>
+          <div class="voce"><span>VBA</span><span class="barra-liv" data-n="2" role="img" aria-label="2/6"></span></div>
+          <div class="voce"><span>Python</span><span class="barra-liv" data-n="1" role="img" aria-label="1/6"></span></div>
+          <div class="voce"><span>SQL</span><span class="barra-liv" data-n="1" role="img" aria-label="1/6"></span></div>
+        </div>
+      </div>
+      <p class="legenda-liv appare" data-i18n="stack.legenda">6 segmenti pieni = padronanza completa. I segmenti vuoti sono la strada ancora da fare.</p>
+    </div>
+  </section>
+
+  <!-- DIARIO DI BORDO -->
+  <section id="log">
+    <div class="contenitore">
+      <p class="titolo-sez appare">// git log --diario</p>
+      <h2 class="appare" data-i18n="log.titolo">Diario di bordo.</h2>
+      <p class="intro appare" data-i18n="log.intro">Imparo in pubblico: ogni passo importante finisce qui.</p>
+      <div class="log">
+        <div class="voce-log appare">
+          <time>2026-11</time>
+          <h3 data-i18n="l1.t">Primo sito, primo repository, primo coach AI</h3>
+          <p data-i18n="l1.p">Installo Git e la GitHub CLI, creo il mio primo branch, pubblico due landing page e scrivo la skill <code>/english</code>. Inizio a lavorare a voce con Claude Code.</p>
+        </div>
+        <div class="voce-log appare">
+          <time>2026-04</time>
+          <h3 data-i18n="l2.t">Consulente ERP</h3>
+          <p data-i18n="l2.p">Entro nel mondo della consulenza: analisi funzionale con i clienti, trasferte, quasi tutti i moduli del gestionale, dal controllo di gestione ai progetti.</p>
+        </div>
+        <div class="voce-log passato appare">
+          <time data-i18n="l3.d">prima</time>
+          <h3 data-i18n="l3.t">Logistica internazionale e contabilità</h3>
+          <p data-i18n="l3.p">Due anni tra gestione del traffico e contabilità: strumenti in Excel e VBA, analisi di marginalità, la migrazione da Microsoft Dynamics a Sage X3. Traffic Academy e Young Academy con la Copenhagen Business School.</p>
+        </div>
+        <div class="voce-log passato appare">
+          <time data-i18n="l4.d">all'inizio</time>
+          <h3 data-i18n="l4.t">Laurea magistrale in Ingegneria</h3>
+          <p data-i18n="l4.p">Università di Parma. Il metodo: scomporre i problemi, misurare, migliorare.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATTI -->
+  <section class="contatti" id="contatti">
+    <div class="contenitore">
+      <p class="titolo-sez appare">// contatti</p>
+      <h2 class="appare" data-i18n="cont.titolo">Costruiamo qualcosa insieme?</h2>
+      <div class="finestra appare">
+        <div class="barra"><i></i><i></i><i></i><span>contatti.sh</span></div>
+        <div class="terminale">
+          <div class="riga"><span class="prompt">$</span> <span class="cmd">./contattami.sh</span></div>
+          <div class="riga out" data-i18n="cont.out">Il modo più veloce è LinkedIn. Il codice è su GitHub.</div>
+          <div class="azioni">
+            <a class="btn btn-verde" href="https://www.linkedin.com/in/armando-leone-1b5327211/" target="_blank" rel="noopener" data-i18n="cont.btn">Scrivimi su LinkedIn →</a>
+            <a class="btn" href="https://github.com/armandoleone3011" target="_blank" rel="noopener">github.com/armandoleone3011</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <footer>
-    <p>© 2026 Armando · Pubblicato con GitHub Pages</p>
+    <div class="contenitore">
+      <span>© 2026 Armando Leone · <span data-i18n="footer.fatto">fatto a mano con Claude Code</span></span>
+      <a href="consulenza.html" data-i18n="footer.cons">Cerchi la consulenza? → consulenza.html</a>
+    </div>
   </footer>
 
+  <script>
+    // ---------- Traduzioni inglesi (l'italiano è già nella pagina) ----------
+    const EN = {
+      "hero.titolo": "A Business Analyst who <span class=\"grad\">builds with AI</span>.",
+      "hero.sotto": "I know how companies work and the ERP systems they run on. Now I'm learning to turn that into tools, automations and websites, with AI as my co-worker.",
+      "hero.progetti": "./projects →",
+      "chi.titolo": "From business processes to code.",
+      "chi.testo": "Engineer, two years in international logistics across traffic management and accounting, now an ERP consultant. Code is my new tool: not to become a pure developer, but to build the solutions I used to only describe.",
+      "prog.titolo": "Things I've built.",
+      "prog.intro": "A few projects, all real. Some are public on GitHub, others are work tools and stay private.",
+      "st.pubblico": "public", "st.locale": "local skill", "st.script": "script", "st.privato": "private",
+      "p1.t": "My personal website",
+      "p1.p": "Two pages in one repository: this developer page and an editorial consulting page. Bilingual, responsive, with AI background removal for the photos. Built with Claude Code, one branch at a time.",
+      "p2.t": "An English coach inside Claude Code",
+      "p2.p": "A skill I use every day: when I write or dictate in English, it corrects my main mistakes, shows how a native speaker would say it, and checks it understood my request before acting.",
+      "p3.t": "AI background removal for photos",
+      "p3.p": "A Python script that uses a segmentation model to remove backgrounds from portraits, crop them and optimise them for the web. The photo on this page went through it.",
+      "p4.t": "Excel tools for logistics",
+      "p4.p": "Before \"real\" code: an Excel and VBA model to check trailer rental rates, with monthly forecasts and a dashboard, and a system to track company assets held by carriers.",
+      "stack.titolo": "What I work with, honestly.",
+      "stack.intro": "Levels are my own assessment: I'd rather say where I really am.",
+      "s.processi": "Process analysis", "s.erp": "ERP systems", "s.cont": "Accounting and control",
+      "s.prompt": "Writing prompts and skills", "s.voce": "Voice dictation workflow", "s.agenti": "Agents and automation",
+      "stack.legenda": "6 full segments = full mastery. Empty segments are the road still ahead.",
+      "log.titolo": "Build log.",
+      "log.intro": "I learn in public: every important step ends up here.",
+      "l1.t": "First website, first repository, first AI coach",
+      "l1.p": "I install Git and the GitHub CLI, create my first branch, publish two landing pages and write the <code>/english</code> skill. I start working with Claude Code by voice.",
+      "l2.t": "ERP consultant",
+      "l2.p": "I move into consulting: functional analysis with clients, on-site visits, almost every ERP module, from management control to projects.",
+      "l3.d": "before", "l3.t": "International logistics and accounting",
+      "l3.p": "Two years across traffic management and accounting: Excel and VBA tools, margin analysis, the migration from Microsoft Dynamics to Sage X3. Traffic Academy and Young Academy with Copenhagen Business School.",
+      "l4.d": "at the start", "l4.t": "Master's degree in Engineering",
+      "l4.p": "University of Parma. The method: break problems down, measure, improve.",
+      "cont.titolo": "Shall we build something together?",
+      "cont.out": "The fastest way is LinkedIn. The code is on GitHub.",
+      "cont.btn": "Message me on LinkedIn →",
+      "footer.fatto": "handmade with Claude Code",
+      "footer.cons": "Looking for consulting? → consulenza.html"
+    };
+    const TITOLI = { it: document.title, en: "Armando Leone · Business Analyst who builds with AI" };
+
+    // Righe del terminale nell'intestazione
+    const RIGHE = {
+      it: [
+        ["whoami", "<b>Armando Leone</b>"],
+        ["cat ruolo.txt", "Business Analyst · <span class=\"acc\">ERP</span> · AI builder"],
+        ["cat obiettivo.txt", "Usare l'AI per costruire strumenti che fanno risparmiare tempo alle aziende."],
+        ["git status", "<span class=\"acc\">in corso:</span> sto imparando, un commit alla volta"]
+      ],
+      en: [
+        ["whoami", "<b>Armando Leone</b>"],
+        ["cat role.txt", "Business Analyst · <span class=\"acc\">ERP</span> · AI builder"],
+        ["cat goal.txt", "Using AI to build tools that save companies time."],
+        ["git status", "<span class=\"acc\">in progress:</span> learning, one commit at a time"]
+      ]
+    };
+    const term = document.getElementById('terminale');
+    const animato = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let esecuzione = 0;
+
+    async function scriviTerminale(lingua) {
+      const mia = ++esecuzione;
+      term.innerHTML = '';
+      const attendi = (ms) => new Promise((r) => setTimeout(r, animato ? ms : 0));
+      for (const [cmd, out] of RIGHE[lingua]) {
+        const riga = document.createElement('div'); riga.className = 'riga';
+        riga.innerHTML = '<span class="prompt">$</span> <span class="cmd"></span><span class="cursore"></span>';
+        term.appendChild(riga);
+        const c = riga.querySelector('.cmd');
+        for (const ch of cmd) { if (mia !== esecuzione) return; c.textContent += ch; await attendi(45); }
+        await attendi(250);
+        riga.querySelector('.cursore').remove();
+        const o = document.createElement('div'); o.className = 'riga out'; o.innerHTML = out; term.appendChild(o);
+        await attendi(350);
+      }
+      if (mia !== esecuzione) return;
+      const fine = document.createElement('div'); fine.className = 'riga';
+      fine.innerHTML = '<span class="prompt">$</span> <span class="cursore"></span>';
+      term.appendChild(fine);
+    }
+
+    const elementi = document.querySelectorAll('[data-i18n]');
+    elementi.forEach((el) => { el.dataset.it = el.innerHTML; });
+    function impostaLingua(lingua) {
+      elementi.forEach((el) => { const k = el.dataset.i18n; el.innerHTML = lingua === 'en' && EN[k] ? EN[k] : el.dataset.it; });
+      document.documentElement.lang = lingua;
+      document.title = TITOLI[lingua];
+      document.querySelectorAll('.lingua button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lingua)));
+      try { localStorage.setItem('lingua', lingua); } catch (e) {}
+      scriviTerminale(lingua);
+    }
+    document.querySelectorAll('.lingua button').forEach((b) => b.addEventListener('click', () => impostaLingua(b.dataset.lang)));
+    let iniziale = null;
+    try { iniziale = localStorage.getItem('lingua'); } catch (e) {}
+    if (!iniziale) iniziale = (navigator.language || 'it').toLowerCase().startsWith('it') ? 'it' : 'en';
+    impostaLingua(iniziale);
+
+    // Barre dei livelli a 6 segmenti
+    document.querySelectorAll('.barra-liv').forEach((b) => {
+      const n = Number(b.dataset.n);
+      for (let i = 0; i < 6; i++) { const seg = document.createElement('b'); if (i < n) seg.className = 'on'; b.appendChild(seg); }
+    });
+
+    const osservatore = new IntersectionObserver((voci) => {
+      voci.forEach((v) => { if (v.isIntersecting) { v.target.classList.add('visibile'); osservatore.unobserve(v.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.appare').forEach((el) => osservatore.observe(el));
+  </script>
 </body>
 </html>

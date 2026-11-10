@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Armando Leone · Consulenza strategica e operativa</title>
+  <meta name="description" content="Consulenza strategica e operativa per PMI della manifattura, della logistica e della distribuzione: margini, processi, lean e supply chain.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --carta: #f6f4ef;
+      --bianco: #ffffff;
+      --inchiostro: #14202e;
+      --testo: #3b4552;
+      --tenue: #6b7480;
+      --riga: #dcd7cc;
+      --blu: #0f2a44;
+      --ottone: #9a7b4f;
+      --max: 1180px;
+      --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+      --sans: "Inter", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--carta); color: var(--testo); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; height: auto; }
+
+    .contenitore { max-width: var(--max); margin: 0 auto; padding: 0 2rem; }
+    h1, h2, h3, blockquote { font-family: var(--serif); color: var(--inchiostro); font-weight: 400; letter-spacing: -0.01em; }
+    .occhiello {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ottone); margin-bottom: 1.25rem;
+    }
+
+    /* ---------- Navigazione ---------- */
+    nav { position: sticky; top: 0; z-index: 10; background: rgba(246, 244, 239, 0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--riga); }
+    nav .contenitore { height: 68px; display: flex; align-items: center; gap: 2rem; }
+    .marchio { font-family: var(--serif); font-size: 1.2rem; color: var(--inchiostro); white-space: nowrap; }
+    .marchio small { font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tenue); margin-left: 0.6rem; }
+    nav ul { display: flex; gap: 2rem; list-style: none; margin-left: auto; font-size: 0.88rem; }
+    nav ul a { color: var(--testo); transition: color .2s; }
+    nav ul a:hover { color: var(--blu); }
+    .lingua { display: flex; gap: 0.15rem; font-size: 0.78rem; font-weight: 600; }
+    .lingua button { background: none; border: 0; font: inherit; color: var(--tenue); cursor: pointer; padding: 0.2rem 0.35rem; border-bottom: 1px solid transparent; }
+    .lingua button[aria-pressed="true"] { color: var(--inchiostro); border-bottom-color: var(--inchiostro); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 0.9rem 1.5rem; border-radius: 2px;
+      font-size: 0.92rem; font-weight: 500; letter-spacing: 0.01em;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .btn-pieno { background: var(--blu); color: #fff; }
+    .btn-pieno:hover { background: #163a5e; }
+    .btn-linea { border: 1px solid var(--inchiostro); color: var(--inchiostro); }
+    .btn-linea:hover { background: var(--inchiostro); color: #fff; }
+    .freccia { transition: transform .2s; }
+    .btn:hover .freccia { transform: translateX(3px); }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 6rem 0 5rem; }
+    .hero .contenitore { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4.5rem; align-items: center; }
+    .hero h1 { font-size: clamp(2.6rem, 5.2vw, 4.4rem); line-height: 1.08; }
+    .hero h1 em { font-style: italic; color: var(--blu); }
+    .hero p.sotto { font-size: 1.15rem; margin-top: 1.75rem; max-width: 540px; }
+    .hero .azioni { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem; }
+    .hero-img { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.35) contrast(1.05); }
+    .hero-img figcaption {
+      position: absolute; left: 0; bottom: 0; background: var(--carta); padding: 1rem 1.25rem 0 0;
+      font-size: 0.8rem; color: var(--tenue); max-width: 75%;
+    }
+
+    /* Settori in riga */
+    .settori-riga { border-top: 1px solid var(--riga); border-bottom: 1px solid var(--riga); }
+    .settori-riga .contenitore { display: grid; grid-template-columns: auto repeat(3, 1fr); align-items: center; }
+    .settori-riga span { padding: 1.4rem 0; font-size: 0.95rem; color: var(--inchiostro); }
+    .settori-riga span:first-child { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--tenue); padding-right: 3rem; }
+    .settori-riga span + span { border-left: 1px solid var(--riga); padding-left: 1.75rem; }
+
+    /* ---------- Sezioni ---------- */
+    section { padding: 7rem 0; }
+    .testata { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 4rem; margin-bottom: 4rem; }
+    .testata h2 { font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.15; }
+    .testata p { font-size: 1.08rem; align-self: end; }
+
+    /* Questioni */
+    .questioni { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--inchiostro); }
+    .questione { padding: 2.25rem 2.5rem 2.25rem 0; border-bottom: 1px solid var(--riga); display: grid; grid-template-columns: 3rem 1fr; }
+    .questione:nth-child(even) { padding-left: 2.5rem; padding-right: 0; border-left: 1px solid var(--riga); }
+    .num { font-family: var(--serif); color: var(--ottone); font-size: 1rem; }
+    .questione h3 { font-size: 1.35rem; line-height: 1.3; margin-bottom: 0.5rem; }
+
+    /* Numeri */
+    .numeri { border-bottom: 1px solid var(--riga); }
+    .numeri .contenitore { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .numero { padding: 3rem 2rem 3rem 0; }
+    .numero + .numero { border-left: 1px solid var(--riga); padding-left: 2rem; }
+    .numero strong { display: block; font-family: var(--serif); font-weight: 400; font-size: 3rem; line-height: 1; color: var(--blu); margin-bottom: 0.75rem; }
+    .numero span { font-size: 0.92rem; }
+
+    /* Mission */
+    .mission { background: var(--blu); color: #c9d3de; padding: 8rem 0; }
+    .mission .occhiello { color: #c8ad84; }
+    .mission blockquote { color: #fff; font-size: clamp(2rem, 4.4vw, 3.6rem); line-height: 1.18; font-style: italic; max-width: 980px; }
+    .mission p { font-size: 1.1rem; max-width: 640px; margin-top: 2rem; }
+
+    /* Ambiti */
+    .ambiti { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem 2.5rem; }
+    .ambito { border-top: 1px solid var(--inchiostro); padding-top: 1.5rem; }
+    .ambito .num { display: block; margin-bottom: 1.25rem; }
+    .ambito h3 { font-size: 1.3rem; line-height: 1.3; margin-bottom: 0.75rem; }
+    .ambito p { font-size: 0.97rem; }
+
+    /* Settori con immagini */
+    .bianco { background: var(--bianco); }
+    .settori { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .settore figure { aspect-ratio: 3 / 2; overflow: hidden; margin-bottom: 1.25rem; }
+    .settore img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.4); transition: filter .6s, transform 1s; }
+    .settore:hover img { filter: grayscale(0); transform: scale(1.03); }
+    .settore h3 { font-size: 1.35rem; margin-bottom: 0.4rem; }
+
+    /* Approccio */
+    .approccio { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 5rem; align-items: start; }
+    .approccio figure { aspect-ratio: 4 / 5; overflow: hidden; position: sticky; top: 100px; }
+    .approccio figure img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.5); }
+    .passi { list-style: none; }
+    .passi li { display: grid; grid-template-columns: 3rem 1fr; padding: 2rem 0; border-bottom: 1px solid var(--riga); }
+    .passi li:first-child { border-top: 1px solid var(--inchiostro); }
+    .passi h3 { font-size: 1.35rem; margin-bottom: 0.4rem; }
+
+    /* Esperienze */
+    .esperienza { display: grid; grid-template-columns: 0.75fr 1.25fr; gap: 4rem; padding: 3rem 0; border-top: 1px solid var(--riga); }
+    .esperienza:first-of-type { border-top-color: var(--inchiostro); }
+    .meta dt { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--tenue); }
+    .meta dd { color: var(--inchiostro); margin-bottom: 1rem; }
+    .esperienza h3 { font-size: 1.7rem; line-height: 1.25; margin-bottom: 1.25rem; }
+    .blocchi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .blocchi h4 { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ottone); margin-bottom: 0.5rem; }
+    .blocchi p { font-size: 0.95rem; }
+
+    /* Profilo */
+    .profilo { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 5rem; align-items: center; }
+    .profilo figure { aspect-ratio: 4 / 5; overflow: hidden; }
+    .profilo figure img { width: 100%; height: 100%; object-fit: cover; }
+    .profilo h2 { font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.15; margin-bottom: 1.5rem; }
+    .profilo p { font-size: 1.08rem; }
+    .credenziali { list-style: none; margin-top: 2.5rem; border-top: 1px solid var(--riga); }
+    .credenziali li { display: grid; grid-template-columns: 11rem 1fr; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--riga); font-size: 0.97rem; }
+    .credenziali strong { color: var(--inchiostro); font-weight: 600; }
+
+    /* Contatto */
+    .contatto { background: var(--inchiostro); color: #c9d3de; padding: 6.5rem 0; }
+    .contatto .contenitore { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 3rem; align-items: end; }
+    .contatto h2 { color: #fff; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.15; }
+    .contatto p { margin-top: 1.25rem; font-size: 1.08rem; max-width: 560px; }
+    .contatto .btn-pieno { background: #fff; color: var(--inchiostro); justify-self: end; }
+    .contatto .btn-pieno:hover { background: #e6e2d8; }
+
+    footer { background: var(--inchiostro); color: #7d8896; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.1); }
+    footer .contenitore { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-top: 1.75rem; padding-bottom: 2rem; }
+    footer a { text-decoration: underline; }
+
+    /* Animazione discreta */
+    .appare { opacity: 0; transform: translateY(14px); transition: opacity .8s ease, transform .8s ease; }
+    .appare.visibile { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .appare { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+    @media (max-width: 980px) {
+      nav ul { display: none; }
+      .lingua { margin-left: auto; }
+      .hero .contenitore, .testata, .approccio, .profilo, .esperienza, .contatto .contenitore { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-img { aspect-ratio: 16 / 10; }
+      .ambiti { grid-template-columns: 1fr 1fr; }
+      .numeri .contenitore { grid-template-columns: 1fr 1fr; }
+      .numero:nth-child(3) { border-left: 0; padding-left: 0; }
+      .approccio figure { position: static; aspect-ratio: 16 / 10; }
+      .profilo figure { max-width: 420px; }
+      .contatto .btn-pieno { justify-self: start; }
+    }
+    @media (max-width: 680px) {
+      .contenitore { padding: 0 1.25rem; }
+      section { padding: 5rem 0; }
+      .hero { padding: 3.5rem 0 4rem; }
+      .marchio small { display: none; }
+      .questioni, .ambiti, .settori, .blocchi { grid-template-columns: 1fr; }
+      .questione, .questione:nth-child(even) { padding: 1.75rem 0; border-left: 0; }
+      .settori-riga .contenitore { grid-template-columns: 1fr; }
+      .numero, .numero + .numero { padding: 1.75rem 1rem 1.75rem 0; }
+      .numero strong { font-size: 2.3rem; }
+      .settori-riga span, .settori-riga span + span { border-left: 0; padding: 0.6rem 0; }
+      .settori-riga span:first-child { padding-top: 1.2rem; }
+      .settori-riga span:last-child { padding-bottom: 1.2rem; }
+      .credenziali li { grid-template-columns: 1fr; gap: 0.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="contenitore">
+      <a href="#" class="marchio">Armando Leone<small data-i18n="nav.ruolo">Consulenza</small></a>
+      <ul>
+        <li><a href="#ambiti" data-i18n="nav.ambiti">Ambiti</a></li>
+        <li><a href="#approccio" data-i18n="nav.approccio">Approccio</a></li>
+        <li><a href="#esperienze" data-i18n="nav.esperienze">Esperienze</a></li>
+        <li><a href="#profilo" data-i18n="nav.profilo">Profilo</a></li>
+      </ul>
+      <div class="lingua" role="group" aria-label="Lingua / Language">
+        <button type="button" data-lang="it" aria-pressed="true">IT</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="contenitore">
+      <div>
+        <p class="occhiello appare" data-i18n="hero.occhiello">Consulenza strategica e operativa</p>
+        <h1 class="appare" data-i18n="hero.titolo">Numeri chiari, <em>decisioni consapevoli.</em></h1>
+        <p class="sotto appare" data-i18n="hero.sotto">Affianco le PMI della manifattura, della logistica e della distribuzione nell'analisi di margini, processi, contabilità e supply chain: dalla diagnosi agli strumenti operativi.</p>
+        <div class="azioni appare">
+          <a class="btn btn-pieno" href="https://www.linkedin.com/in/armando-leone-1b5327211/" target="_blank" rel="noopener"><span data-i18n="cta.contatto">Richiedi un primo confronto</span> <span class="freccia">→</span></a>
+          <a class="btn btn-linea" href="#approccio" data-i18n="cta.approccio">L'approccio</a>
+        </div>
+      </div>
+      <figure class="hero-img appare">
+        <img src="assets/hero-magazzino.webp" alt="Corridoio di un magazzino" width="1600" height="900">
+        <figcaption data-i18n="hero.didascalia">Ogni scaffale, ogni tratta, ogni fornitore ha un costo. La domanda è se lo conosci.</figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <div class="settori-riga">
+    <div class="contenitore">
+      <span data-i18n="settori.etichetta">Settori</span>
+      <span data-i18n="settori.1">Manifattura</span>
+      <span data-i18n="settori.2">Logistica e 3PL</span>
+      <span data-i18n="settori.3">Distribuzione</span>
+    </div>
+  </div>
+
+  <!-- NUMERI -->
+  <div class="numeri">
+    <div class="contenitore">
+      <div class="numero appare"><strong>3</strong><span data-i18n="n.1">ERP conosciuti dall'interno: Infor LN, Sage X3, Microsoft Dynamics</span></div>
+      <div class="numero appare"><strong>1</strong><span data-i18n="n.2">migrazione gestionale seguita, da Microsoft Dynamics a Sage X3</span></div>
+      <div class="numero appare"><strong>360°</strong><span data-i18n="n.3">ciclo contabile gestito in una nuova società, dalle paghe ai cespiti</span></div>
+      <div class="numero appare"><strong>3</strong><span data-i18n="n.4">ambiti di esperienza: logistica, amministrazione e manifattura</span></div>
+    </div>
+  </div>
+
+  <!-- QUESTIONI -->
+  <section>
+    <div class="contenitore">
+      <div class="testata">
+        <div>
+          <p class="occhiello appare" data-i18n="q.occhiello">Le questioni</p>
+          <h2 class="appare" data-i18n="q.titolo">Le domande a cui un'azienda dovrebbe saper rispondere.</h2>
+        </div>
+        <p class="appare" data-i18n="q.testo">Nella mia esperienza, le opportunità più grandi si nascondono dietro domande semplici a cui nessuno, in azienda, ha una risposta basata sui dati.</p>
+      </div>
+      <div class="questioni">
+        <div class="questione appare"><span class="num">01</span><div><h3 data-i18n="q.1.t">Dove si genera, davvero, il margine?</h3><p data-i18n="q.1.p">Per cliente, mercato, prodotto o tratta. E quali attività poco redditizie hanno comunque un valore strategico.</p></div></div>
+        <div class="questione appare"><span class="num">02</span><div><h3 data-i18n="q.2.t">I costi fatturati sono quelli attesi?</h3><p data-i18n="q.2.p">Controlli manuali su fornitori e vettori fanno emergere gli errori quando sono già diventati costi.</p></div></div>
+        <div class="questione appare"><span class="num">03</span><div><h3 data-i18n="q.3.t">Dove si trovano gli asset aziendali?</h3><p data-i18n="q.3.p">Pallet, attrezzature e materiali presso terzi, senza una visione d'insieme aggiornata.</p></div></div>
+        <div class="questione appare"><span class="num">04</span><div><h3 data-i18n="q.4.t">Esiste una sola versione dei numeri?</h3><p data-i18n="q.4.p">Quando ogni reparto lavora sul proprio file Excel, il gestionale smette di essere un riferimento.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <div class="mission">
+    <div class="contenitore">
+      <p class="occhiello appare" data-i18n="m.occhiello">Missione</p>
+      <blockquote class="appare" data-i18n="m.frase">«Rendere visibile ciò che conta, perché ogni scelta di business sia una scelta consapevole.»</blockquote>
+      <p class="appare" data-i18n="m.testo">Anche mantenere un'attività a basso margine può essere la scelta giusta, a patto di sapere perché.</p>
+    </div>
+  </div>
+
+  <!-- AMBITI -->
+  <section id="ambiti">
+    <div class="contenitore">
+      <div class="testata">
+        <div>
+          <p class="occhiello appare" data-i18n="a.occhiello">Ambiti di intervento</p>
+          <h2 class="appare" data-i18n="a.titolo">Dalla strategia agli strumenti operativi.</h2>
+        </div>
+        <p class="appare" data-i18n="a.testo">Un unico interlocutore che collega le scelte di business ai processi e ai dati che le rendono misurabili.</p>
+      </div>
+      <div class="ambiti">
+        <div class="ambito appare"><span class="num">01</span><h3 data-i18n="a.1.t">Analisi strategica e di marginalità</h3><p data-i18n="a.1.p">Lettura della base dati per mercati, clienti e tratte: punti di forza, aree di perdita, potenziale di crescita.</p></div>
+        <div class="ambito appare"><span class="num">02</span><h3 data-i18n="a.2.t">Strumenti di controllo e automazione</h3><p data-i18n="a.2.p">Dashboard, verifica delle fatture, tracciamento degli asset: strumenti su misura che riducono il lavoro manuale.</p></div>
+        <div class="ambito appare"><span class="num">03</span><h3 data-i18n="a.3.t">Processi lean</h3><p data-i18n="a.3.p">Individuazione e riduzione dei muda (attese, movimentazioni, rilavorazioni) per ridurre i costi e migliorare il servizio.</p></div>
+        <div class="ambito appare"><span class="num">04</span><h3 data-i18n="a.4.t">Supply chain e fornitori</h3><p data-i18n="a.4.p">Analisi delle dipendenze e dei punti di fragilità della catena di fornitura, per renderla più solida.</p></div>
+        <div class="ambito appare"><span class="num">05</span><h3 data-i18n="a.5.t">Contabilità e controllo di gestione</h3><p data-i18n="a.5.p">Struttura del piano dei conti e dei centri di costo, cespiti e ammortamenti, reporting per la direzione e il CdA.</p></div>
+        <div class="ambito appare"><span class="num">06</span><h3 data-i18n="a.6.t">Progetti e migrazioni ERP</h3><p data-i18n="a.6.p">Analisi dei requisiti, struttura dei dati e migrazione da un gestionale all'altro, con cautela e precisione.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SETTORI -->
+  <section class="bianco">
+    <div class="contenitore">
+      <div class="testata">
+        <div>
+          <p class="occhiello appare" data-i18n="s.occhiello">Settori</p>
+          <h2 class="appare" data-i18n="s.titolo">Esperienza maturata sul campo.</h2>
+        </div>
+        <p class="appare" data-i18n="s.testo">Conosco i processi, il linguaggio e i vincoli di chi produce, trasporta e distribuisce.</p>
+      </div>
+      <div class="settori">
+        <article class="settore appare"><figure><img src="assets/settore-manifattura.webp" alt="Linea di produzione automatizzata" loading="lazy"></figure><h3 data-i18n="s.1.t">Manifattura</h3><p data-i18n="s.1.p">Processi produttivi, pianificazione e sistemi ERP nelle PMI.</p></article>
+        <article class="settore appare"><figure><img src="assets/settore-logistica.webp" alt="Mezzo pesante in autostrada di notte" loading="lazy"></figure><h3 data-i18n="s.2.t">Logistica e 3PL</h3><p data-i18n="s.2.p">Trasporti, tariffe, marginalità per tratta e gestione degli asset.</p></article>
+        <article class="settore appare"><figure><img src="assets/settore-distribuzione.webp" alt="Merci pronte per la spedizione" loading="lazy"></figure><h3 data-i18n="s.3.t">Distribuzione</h3><p data-i18n="s.3.p">Flussi di merce, magazzino e relazione con i fornitori.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROCCIO -->
+  <section id="approccio">
+    <div class="contenitore approccio">
+      <figure class="appare"><img src="assets/metodo-presenza.webp" alt="Confronto davanti a una lavagna" loading="lazy"></figure>
+      <div>
+        <p class="occhiello appare" data-i18n="p.occhiello">Approccio</p>
+        <h2 class="appare" style="font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.15; margin-bottom: 2.5rem;" data-i18n="p.titolo">Prima comprendere, poi intervenire.</h2>
+        <ol class="passi">
+          <li class="appare"><span class="num">01</span><div><h3 data-i18n="p.1.t">In azienda, non solo da remoto</h3><p data-i18n="p.1.p">Il lavoro comincia sul posto: incontrare le persone e osservare i processi dove avvengono.</p></div></li>
+          <li class="appare"><span class="num">02</span><div><h3 data-i18n="p.2.t">Le domande giuste</h3><p data-i18n="p.2.p">Obiettivi, strategia, dove si guadagna e dove si perde, e perché le cose funzionano come funzionano.</p></div></li>
+          <li class="appare"><span class="num">03</span><div><h3 data-i18n="p.3.t">I numeri, resi visibili</h3><p data-i18n="p.3.p">I dati del gestionale diventano una base condivisa e affidabile per le decisioni.</p></div></li>
+          <li class="appare"><span class="num">04</span><div><h3 data-i18n="p.4.t">Interventi misurabili</h3><p data-i18n="p.4.p">Automazioni, processi più snelli e indicatori per verificare i risultati nel tempo.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESPERIENZE -->
+  <section id="esperienze" class="bianco">
+    <div class="contenitore">
+      <div class="testata">
+        <div>
+          <p class="occhiello appare" data-i18n="e.occhiello">Esperienze selezionate</p>
+          <h2 class="appare" data-i18n="e.titolo">Problemi concreti, risultati misurabili.</h2>
+        </div>
+        <p class="appare" data-i18n="e.testo">Alcuni interventi realizzati in logistica internazionale e in amministrazione.</p>
+      </div>
+
+      <article class="esperienza appare">
+        <dl class="meta"><dt data-i18n="e.settore">Settore</dt><dd data-i18n="e.log">Logistica internazionale</dd><dt data-i18n="e.ambito">Ambito</dt><dd data-i18n="e.1.amb">Controllo dei costi</dd></dl>
+        <div>
+          <h3 data-i18n="e.1.t">Verifica delle tariffe di noleggio dei rimorchi</h3>
+          <div class="blocchi">
+            <div><h4 data-i18n="e.contesto">Contesto</h4><p data-i18n="e.1.c">Nessuno strumento per verificare le fatture di noleggio prima del pagamento.</p></div>
+            <div><h4 data-i18n="e.intervento">Intervento</h4><p data-i18n="e.1.i">Modello Excel/VBA con aggiornamento dei dati, stima mensile e correzione sul mese precedente.</p></div>
+            <div><h4 data-i18n="e.risultato">Risultato</h4><p data-i18n="e.1.r">Ogni fattura confrontata con il valore atteso in pochi minuti.</p></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="esperienza appare">
+        <dl class="meta"><dt data-i18n="e.settore">Settore</dt><dd data-i18n="e.log">Logistica internazionale</dd><dt data-i18n="e.ambito">Ambito</dt><dd data-i18n="e.2.amb">Gestione degli asset</dd></dl>
+        <div>
+          <h3 data-i18n="e.2.t">Tracciamento delle coperte presso i vettori</h3>
+          <div class="blocchi">
+            <div><h4 data-i18n="e.contesto">Contesto</h4><p data-i18n="e.2.c">Asset aziendali affidati ai trasportatori, senza sapere quanti fossero fuori e presso chi.</p></div>
+            <div><h4 data-i18n="e.intervento">Intervento</h4><p data-i18n="e.2.i">Strumento di registrazione delle uscite e dei rientri, con stato aggiornato per vettore.</p></div>
+            <div><h4 data-i18n="e.risultato">Risultato</h4><p data-i18n="e.2.r">Visibilità completa sugli asset e sui rientri mancanti.</p></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="esperienza appare">
+        <dl class="meta"><dt data-i18n="e.settore">Settore</dt><dd data-i18n="e.log">Logistica internazionale</dd><dt data-i18n="e.ambito">Ambito</dt><dd data-i18n="e.3.amb">Strategia commerciale</dd></dl>
+        <div>
+          <h3 data-i18n="e.3.t">Analisi di marginalità per mercati e tratte</h3>
+          <div class="blocchi">
+            <div><h4 data-i18n="e.contesto">Contesto</h4><p data-i18n="e.3.c">Necessità di capire su quali mercati concentrarsi e quali costi giustificare.</p></div>
+            <div><h4 data-i18n="e.intervento">Intervento</h4><p data-i18n="e.3.i">Analisi dell'intera base dati: volumi, marginalità, punti di forza e di debolezza per mercato.</p></div>
+            <div><h4 data-i18n="e.risultato">Risultato</h4><p data-i18n="e.3.r">Scelte strategiche motivate, incluse le tratte a basso margine che sostengono servizi più redditizi.</p></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="esperienza appare">
+        <dl class="meta"><dt data-i18n="e.settore">Settore</dt><dd data-i18n="e.4.set">Nuova società</dd><dt data-i18n="e.ambito">Ambito</dt><dd data-i18n="e.4.amb">Amministrazione e controllo</dd></dl>
+        <div>
+          <h3 data-i18n="e.4.t">Contabilità e controllo per una società appena costituita</h3>
+          <div class="blocchi">
+            <div><h4 data-i18n="e.contesto">Contesto</h4><p data-i18n="e.4.c">Una nuova società da strutturare da zero, con un cambio di gestionale in corso.</p></div>
+            <div><h4 data-i18n="e.intervento">Intervento</h4><p data-i18n="e.4.i">Ciclo contabile completo (paghe, compensi agli amministratori, cespiti e ammortamenti, rapporti con le banche), struttura dei centri di costo, reporting all'AD e al CdA, migrazione dei dati da Microsoft Dynamics a Sage X3.</p></div>
+            <div><h4 data-i18n="e.risultato">Risultato</h4><p data-i18n="e.4.r">Una struttura contabile che rende i costi leggibili e misurabili fin dal primo giorno.</p></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROFILO -->
+  <section id="profilo">
+    <div class="contenitore profilo">
+      <figure class="appare"><img src="assets/armando-ritratto.webp" alt="Ritratto di Armando Leone" width="900" height="1125" loading="lazy"></figure>
+      <div>
+        <p class="occhiello appare" data-i18n="pr.occhiello">Profilo</p>
+        <h2 class="appare">Armando Leone</h2>
+        <p class="appare" data-i18n="pr.testo">Business Analyst e consulente, con una formazione da ingegnere e un'esperienza che va dalla logistica internazionale alla contabilità di una nuova società, fino ai progetti ERP nella manifattura. Unisco la lettura dei numeri alla conoscenza dei processi e dei sistemi che li generano.</p>
+        <ul class="credenziali appare">
+          <li><strong data-i18n="pr.1.k">Formazione</strong><span data-i18n="pr.1.v">Laurea magistrale in Ingegneria, Università di Parma</span></li>
+          <li><strong data-i18n="pr.2.k">Esperienza</strong><span data-i18n="pr.2.v">Logistica internazionale, amministrazione e contabilità, progetti ERP nel manifatturiero</span></li>
+          <li><strong data-i18n="pr.3.k">Competenze</strong><span data-i18n="pr.3.v">Analisi dei dati e di marginalità, contabilità e cespiti, controllo di gestione, processi lean, Excel avanzato</span></li>
+          <li><strong data-i18n="pr.6.k">Gestionali</strong><span data-i18n="pr.6.v">Infor LN, Sage X3, Microsoft Dynamics</span></li>
+          <li><strong data-i18n="pr.4.k">Modalità</strong><span data-i18n="pr.4.v">In presenza presso il cliente e da remoto</span></li>
+          <li><strong data-i18n="pr.5.k">Lingue</strong><span data-i18n="pr.5.v">Italiano, inglese</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATTO -->
+  <div class="contatto">
+    <div class="contenitore">
+      <div>
+        <h2 class="appare" data-i18n="c.titolo">Un primo confronto, senza impegno.</h2>
+        <p class="appare" data-i18n="c.testo">Raccontami la tua azienda e le domande a cui oggi non trovi risposta. Partiamo da lì.</p>
+      </div>
+      <a class="btn btn-pieno appare" href="https://www.linkedin.com/in/armando-leone-1b5327211/" target="_blank" rel="noopener"><span data-i18n="c.btn">Contattami su LinkedIn</span> <span class="freccia">→</span></a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="contenitore">
+      <span>© 2026 Armando Leone</span>
+      <span data-i18n="footer.foto">Fotografie: <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></span>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- Traduzioni inglesi (l'italiano è già nella pagina) ----------
+    const EN = {
+      "nav.ruolo": "Consulting", "nav.ambiti": "Services", "nav.approccio": "Approach", "nav.esperienze": "Experience", "nav.profilo": "Profile",
+      "hero.occhiello": "Strategy and operations consulting",
+      "hero.titolo": "Clear numbers, <em>informed decisions.</em>",
+      "hero.sotto": "I support SMEs in manufacturing, logistics and distribution in analysing margins, processes, accounting and supply chains: from diagnosis to operational tools.",
+      "n.1": "ERP systems known from the inside: Infor LN, Sage X3, Microsoft Dynamics",
+      "n.2": "ERP migration handled, from Microsoft Dynamics to Sage X3",
+      "n.3": "full accounting cycle run for a new company, from payroll to fixed assets",
+      "n.4": "areas of experience: logistics, administration and manufacturing",
+      "cta.contatto": "Request an initial conversation", "cta.approccio": "The approach",
+      "hero.didascalia": "Every shelf, every route, every supplier has a cost. The question is whether you know it.",
+      "settori.etichetta": "Industries", "settori.1": "Manufacturing", "settori.2": "Logistics and 3PL", "settori.3": "Distribution",
+      "q.occhiello": "The questions",
+      "q.titolo": "The questions every company should be able to answer.",
+      "q.testo": "In my experience, the biggest opportunities hide behind simple questions that nobody in the company can answer with data.",
+      "q.1.t": "Where is the margin really made?",
+      "q.1.p": "By customer, market, product or route. And which low-margin activities still have strategic value.",
+      "q.2.t": "Are invoiced costs what you expected?",
+      "q.2.p": "Manual checks on suppliers and carriers reveal errors only once they have already become costs.",
+      "q.3.t": "Where are the company's assets?",
+      "q.3.p": "Pallets, equipment and materials held by third parties, with no up-to-date overall view.",
+      "q.4.t": "Is there a single version of the numbers?",
+      "q.4.p": "When every department works in its own Excel file, the ERP stops being the point of reference.",
+      "m.occhiello": "Mission",
+      "m.frase": "“Make what matters visible, so that every business choice is an informed choice.”",
+      "m.testo": "Even keeping a low-margin activity running can be the right choice, as long as you know why.",
+      "a.occhiello": "Services",
+      "a.titolo": "From strategy to operational tools.",
+      "a.testo": "A single point of contact who connects business choices to the processes and data that make them measurable.",
+      "a.1.t": "Strategy and margin analysis",
+      "a.1.p": "Reading the data by market, customer and route: strengths, loss-making areas, growth potential.",
+      "a.2.t": "Control tools and automation",
+      "a.2.p": "Dashboards, invoice checks, asset tracking: custom tools that reduce manual work.",
+      "a.3.t": "Lean processes",
+      "a.3.p": "Identifying and reducing muda (waiting, handling, rework) to cut costs and improve service.",
+      "a.4.t": "Supply chain and suppliers",
+      "a.4.p": "Analysing dependencies and weak points in the supply chain to make it more resilient.",
+      "a.5.t": "Accounting and management control",
+      "a.5.p": "Chart of accounts and cost centre structure, fixed assets and depreciation, reporting for management and the board.",
+      "a.6.t": "ERP projects and migrations",
+      "a.6.p": "Requirements analysis, data structure and migration from one system to another, with care and precision.",
+      "s.occhiello": "Industries",
+      "s.titolo": "Experience gained in the field.",
+      "s.testo": "I know the processes, the language and the constraints of those who produce, transport and distribute.",
+      "s.1.t": "Manufacturing", "s.1.p": "Production processes, planning and ERP systems in SMEs.",
+      "s.2.t": "Logistics and 3PL", "s.2.p": "Transport, rates, route profitability and asset management.",
+      "s.3.t": "Distribution", "s.3.p": "Goods flows, warehousing and supplier relationships.",
+      "p.occhiello": "Approach",
+      "p.titolo": "Understand first, then act.",
+      "p.1.t": "On site, not just remote",
+      "p.1.p": "The work starts on site: meeting the people and observing processes where they happen.",
+      "p.2.t": "The right questions",
+      "p.2.p": "Goals, strategy, where money is made and lost, and why things work the way they do.",
+      "p.3.t": "Numbers made visible",
+      "p.3.p": "ERP data becomes a shared, reliable basis for decisions.",
+      "p.4.t": "Measurable action",
+      "p.4.p": "Automation, leaner processes and indicators to track results over time.",
+      "e.occhiello": "Selected experience",
+      "e.titolo": "Concrete problems, measurable results.",
+      "e.testo": "Selected projects in international logistics and in administration.",
+      "e.settore": "Industry", "e.log": "International logistics", "e.ambito": "Area",
+      "e.contesto": "Context", "e.intervento": "Action", "e.risultato": "Result",
+      "e.1.amb": "Cost control",
+      "e.1.t": "Trailer rental rate verification",
+      "e.1.c": "No tool to check rental invoices before payment.",
+      "e.1.i": "Excel/VBA model with data refresh, monthly estimate and adjustment based on the previous month.",
+      "e.1.r": "Every invoice checked against the expected value in minutes.",
+      "e.2.amb": "Asset management",
+      "e.2.t": "Tracking protective covers held by carriers",
+      "e.2.c": "Company assets entrusted to carriers, with no record of how many were out or with whom.",
+      "e.2.i": "A tool to log outgoing and returning items, with up-to-date status by carrier.",
+      "e.2.r": "Full visibility of assets and missing returns.",
+      "e.3.amb": "Commercial strategy",
+      "e.3.t": "Margin analysis by market and route",
+      "e.3.c": "The need to decide which markets to focus on and which costs to justify.",
+      "e.3.i": "Analysis of the full database: volumes, margins, strengths and weaknesses by market.",
+      "e.3.r": "Well-founded strategic choices, including low-margin routes that support more profitable services.",
+      "e.4.set": "Newly founded company", "e.4.amb": "Administration and control",
+      "e.4.t": "Accounting and control for a newly founded company",
+      "e.4.c": "A new company to be set up from scratch, with an ERP change under way.",
+      "e.4.i": "Full accounting cycle (payroll, directors' fees, fixed assets and depreciation, banking relationships), cost centre structure, reporting to the CEO and the board, data migration from Microsoft Dynamics to Sage X3.",
+      "e.4.r": "An accounting structure that made costs readable and measurable from day one.",
+      "pr.occhiello": "Profile",
+      "pr.testo": "Business Analyst and consultant with an engineering background and experience ranging from international logistics to accounting for a newly founded company and ERP projects in manufacturing. I combine reading the numbers with knowledge of the processes and systems that produce them.",
+      "pr.1.k": "Education", "pr.1.v": "Master's degree in Engineering, University of Parma",
+      "pr.2.k": "Experience", "pr.2.v": "International logistics, administration and accounting, ERP projects in manufacturing",
+      "pr.3.k": "Skills", "pr.3.v": "Data and margin analysis, accounting and fixed assets, management control, lean processes, advanced Excel",
+      "pr.6.k": "ERP systems", "pr.6.v": "Infor LN, Sage X3, Microsoft Dynamics",
+      "pr.4.k": "Engagement", "pr.4.v": "On site at the client and remote",
+      "pr.5.k": "Languages", "pr.5.v": "Italian, English",
+      "c.titolo": "An initial conversation, with no commitment.",
+      "c.testo": "Tell me about your company and the questions you can't answer today. We'll start from there.",
+      "c.btn": "Contact me on LinkedIn",
+      "footer.foto": "Photography: <a href=\"https://unsplash.com\" target=\"_blank\" rel=\"noopener\">Unsplash</a>"
+    };
+    const TITOLI = { it: document.title, en: "Armando Leone · Strategy and operations consulting" };
+
+    const elementi = document.querySelectorAll('[data-i18n]');
+    elementi.forEach((el) => { el.dataset.it = el.innerHTML; });
+
+    function impostaLingua(lingua) {
+      elementi.forEach((el) => {
+        const chiave = el.dataset.i18n;
+        el.innerHTML = lingua === 'en' && EN[chiave] ? EN[chiave] : el.dataset.it;
+      });
+      document.documentElement.lang = lingua;
+      document.title = TITOLI[lingua];
+      document.querySelectorAll('.lingua button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lingua)));
+      try { localStorage.setItem('lingua', lingua); } catch (e) {}
+    }
+    document.querySelectorAll('.lingua button').forEach((b) => b.addEventListener('click', () => impostaLingua(b.dataset.lang)));
+
+    let iniziale = null;
+    try { iniziale = localStorage.getItem('lingua'); } catch (e) {}
+    if (!iniziale) iniziale = (navigator.language || 'it').toLowerCase().startsWith('it') ? 'it' : 'en';
+    if (iniziale === 'en') impostaLingua('en');
+
+    const osservatore = new IntersectionObserver((voci) => {
+      voci.forEach((voce) => { if (voce.isIntersecting) { voce.target.classList.add('visibile'); osservatore.unobserve(voce.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.appare').forEach((el) => osservatore.observe(el));
+  </script>
+</body>
+</html>
